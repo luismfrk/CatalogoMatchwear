@@ -1,0 +1,21 @@
+{
+  "name": "matchwear-fc-catalogo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node src/sync/run.js",
+    "worker": "node src/sync/worker.js",
+    "admin": "node src/admin/cli.js",
+    "admin:server": "node src/admin/server.js",
+    "build": "node scripts/build-site.js",
+    "dev": "node scripts/serve.js",
+    "test": "node --test",
+    "verify:live": "node scripts/verify-live.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.922.0",
+    "cheerio": "^1.1.2",
+    "dotenv": "^17.2.3"
+  }
+}

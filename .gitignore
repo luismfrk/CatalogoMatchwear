@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.playwright-cli/
+output/
+data/state.json
+data/catalog.json
+data/sync-report.json
+*.log

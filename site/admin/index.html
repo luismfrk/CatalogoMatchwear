@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css" />
+    <title>Painel — Matchwear FC</title>
+  </head>
+  <body>
+    <main>
+      <section id="loginView" class="login-card">
+        <img src="../assets/matchwear-logo-green-on-blue.png" alt="Matchwear" />
+        <p>PAINEL DO CATÁLOGO</p>
+        <h1>ENTRAR</h1>
+        <form id="loginForm">
+          <label
+            >Senha administrativa<input
+              id="password"
+              type="password"
+              required
+              autocomplete="current-password" /></label
+          ><button>Entrar</button>
+        </form>
+        <p id="loginError" class="error"></p>
+      </section>
+      <section id="panelView" hidden>
+        <header>
+          <div>
+            <p>MATCHWEAR FC</p>
+            <h1>PRODUTOS</h1>
+          </div>
+          <button id="logout" class="secondary">Sair</button>
+        </header>
+        <div class="summary">
+          <article>
+            <strong id="draftCount">—</strong><span>Rascunhos</span>
+          </article>
+          <article>
+            <strong id="publishedCount">—</strong><span>Publicados</span>
+          </article>
+          <article>
+            <strong id="syncDate">—</strong><span>Última sincronização</span>
+          </article>
+        </div>
+        <div class="filters">
+          <input
+            id="searchAdmin"
+            type="search"
+            placeholder="Buscar produto..."
+          /><select id="visibility">
+            <option value="draft">Rascunhos</option>
+            <option value="published">Publicados</option>
+            <option value="all">Todos</option>
+          </select>
+        </div>
+        <p id="notice" class="notice"></p>
+        <div id="products" class="products"></div>
+      </section>
+    </main>
+    <dialog id="editor">
+      <button id="closeEditor" class="close" aria-label="Fechar">×</button>
+      <form id="editorForm">
+        <img id="editorImage" alt="" />
+        <div>
+          <span id="editorCategory"></span>
+          <h2 id="editorName"></h2>
+          <label
+            >Preço de venda (R$)<input
+              id="editorPrice"
+              type="number"
+              min="0.01"
+              step="0.01" /></label
+          ><label
+            >Imagens próprias HTTPS, uma por linha<textarea
+              id="editorImages"
+              rows="5"
+            ></textarea>
+          </label>
+          <p class="hint">
+            Deixe vazio para continuar usando as imagens importadas.
+          </p>
+          <div class="actions">
+            <button id="saveDraft" type="button" class="secondary">
+              Salvar rascunho</button
+            ><button id="publish" type="button">Publicar</button>
+          </div>
+          <button id="unpublish" type="button" class="danger">
+            Retirar da vitrine
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <script src="../config.js"></script>
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>
