@@ -58,6 +58,21 @@ Produtos novos entram como rascunho e sem preço. Uma coleta vazia, com mais de 
 
 O bucket/CDN deve permitir CORS `GET` a partir do domínio do Static Site. Alterações no catálogo ficam disponíveis sem redeploy, respeitando o cache de 60 segundos.
 
+## Neon Postgres
+
+O estado privado da sincronização, o catálogo publicado e o último relatório podem ser compartilhados pelo Neon. A aplicação usa a URL com pool (`DATABASE_URL`) no worker e na API e reserva a URL direta (`DATABASE_URL_UNPOOLED`) para migrações.
+
+```bash
+neon deploy
+npm run db:migrate
+npm run db:seed
+npm run db:verify
+```
+
+`db:seed` importa os arquivos existentes de `data/` apenas quando o documento ainda não existe no Neon. Novas sincronizações e alterações feitas no painel gravam no Postgres quando `STORAGE_MODE=postgres` ou quando `DATABASE_URL` está configurada sem um modo explícito.
+
+No Render, configure `DATABASE_URL` no worker e no serviço `matchwear-fc-admin-api`, mantenha `STORAGE_MODE=postgres` e use como `CATALOG_URL` do Static Site a URL pública da API seguida de `/api/catalog`. Execute `npm run db:migrate` uma vez antes de iniciar os serviços. `DATABASE_URL_UNPOOLED` é necessária apenas onde as migrações são executadas e nunca deve ser exposta na vitrine.
+
 ## Verificações
 
 `npm test` cobre idempotência, atualização isolada de estoque, preservação de preço/visibilidade, rejeição de coleta falha e ausência de dados do fornecedor no JSON público. `npm run verify:live` refaz a leitura do produto real. O layout usa breakpoints para celular, tamanhos esgotados ficam desabilitados e a mensagem do WhatsApp contém produto, tamanho e link da Matchwear FC.

@@ -75,6 +75,21 @@ function setCors(req, res) {
 
 export async function handleAdminApi(req, res) {
   const url = new URL(req.url, "http://localhost");
+  if (url.pathname === "/api/catalog" && req.method === "GET") {
+    res.setHeader("access-control-allow-origin", "*");
+    res.setHeader("cache-control", "public, max-age=60");
+    try {
+      const catalog = await readJson("catalog.json", {
+        generatedAt: null,
+        products: [],
+      });
+      send(res, 200, catalog);
+    } catch (error) {
+      console.error(error);
+      send(res, 503, { error: "Catálogo temporariamente indisponível." });
+    }
+    return true;
+  }
   if (!url.pathname.startsWith("/api/admin/")) return false;
   setCors(req, res);
   if (req.method === "OPTIONS") {
