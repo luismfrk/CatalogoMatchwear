@@ -132,11 +132,14 @@ h3 {
   color: var(--white);
   font-size: clamp(64px, 8.2vw, 126px);
   letter-spacing: -0.045em;
-  line-height: 0.82;
+  line-height: 0.9;
 }
 .hero h1 span {
   display: block;
   white-space: nowrap;
+}
+.hero h1 span + span {
+  margin-top: 0.08em;
 }
 .hero h1::after {
   display: block;
