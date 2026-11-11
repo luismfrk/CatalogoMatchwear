@@ -21,6 +21,8 @@ const ids = [
   "cartItems",
   "cartSummary",
   "closeCart",
+  "footerWhatsapp",
+  "copyrightYear",
 ];
 const ui = Object.fromEntries(
   ids.map((id) => [id, document.getElementById(id)]),
@@ -137,6 +139,14 @@ function setup() {
   });
   if (catalog.lastSuccessfulSyncAt)
     ui.sync.textContent = `Catálogo atualizado em ${new Date(catalog.lastSuccessfulSyncAt).toLocaleString("pt-BR")}`;
+  const whatsappNumber = String(catalog.whatsappNumber || "").replace(/\D/g, "");
+  if (whatsappNumber) {
+    ui.footerWhatsapp.href = `https://wa.me/${whatsappNumber}`;
+  } else {
+    ui.footerWhatsapp.removeAttribute("href");
+    ui.footerWhatsapp.setAttribute("aria-disabled", "true");
+  }
+  ui.copyrightYear.textContent = new Date().getFullYear();
   updateCounters();
 }
 
