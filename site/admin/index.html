@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="../favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,19 +17,48 @@
   <body>
     <main>
       <section id="loginView" class="login-card">
-        <img src="../assets/matchwear-logo-green-on-blue.png" alt="Matchwear" />
-        <p>PAINEL DO CATÁLOGO</p>
-        <h1>ENTRAR</h1>
-        <form id="loginForm">
-          <label
-            >Senha administrativa<input
+        <div class="login-brand-panel">
+          <div class="login-logo-crop">
+            <img
+              src="../assets/matchwear-logo-green-on-blue.png"
+              alt="Matchwear — Vista sua paixão"
+            />
+          </div>
+          <span class="panel-badge">Gestão do catálogo</span>
+          <h2>Seu time.<br />Sua vitrine.</h2>
+          <p>
+            Revise produtos, ajuste preços e publique novidades em um só lugar.
+          </p>
+          <div class="brand-lines" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="login-form-panel">
+          <a class="back-store" href="../">← Voltar para a loja</a>
+          <p class="login-eyebrow">ÁREA ADMINISTRATIVA</p>
+          <h1>Bem-vindo.</h1>
+          <p class="login-intro">
+            Entre com sua senha para gerenciar a Matchwear FC.
+          </p>
+          <form id="loginForm">
+            <label for="password">Senha administrativa</label>
+            <input
               id="password"
               type="password"
               required
-              autocomplete="current-password" /></label
-          ><button>Entrar</button>
-        </form>
-        <p id="loginError" class="error"></p>
+              autocomplete="current-password"
+              placeholder="Digite sua senha"
+            />
+            <button id="loginButton" type="submit">
+              <span>Entrar no painel</span><span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p id="loginError" class="error" role="alert"></p>
+          <p class="secure-note">
+            <span aria-hidden="true">●</span> Acesso restrito à equipe Matchwear
+            FC
+          </p>
+        </div>
       </section>
       <section id="panelView" hidden>
         <header>

@@ -5,22 +5,45 @@ let allProducts = [];
 let current;
 
 async function request(path, options = {}) {
-  const response = await fetch(`${apiBase}${path}`, {
-    ...options,
-    headers: {
-      "content-type": "application/json",
-      ...(token ? { authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    },
-  });
-  const value = await response.json();
-  if (!response.ok) throw new Error(value.error || "Erro inesperado.");
-  return value;
+  try {
+    const response = await fetch(`${apiBase}${path}`, {
+      ...options,
+      headers: {
+        "content-type": "application/json",
+        ...(token ? { authorization: `Bearer ${token}` } : {}),
+        ...options.headers,
+      },
+    });
+    const contentType = response.headers.get("content-type") || "";
+    const value = contentType.includes("application/json")
+      ? await response.json()
+      : null;
+    if (!response.ok) {
+      throw new Error(
+        value?.error ||
+          "O painel está temporariamente indisponível. Tente novamente em instantes.",
+      );
+    }
+    if (!value) {
+      throw new Error("A API do painel não respondeu corretamente.");
+    }
+    return value;
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error(
+        "Não foi possível conectar ao painel. Verifique sua conexão.",
+      );
+    }
+    throw error;
+  }
 }
 
 byId("loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   byId("loginError").textContent = "";
+  const button = byId("loginButton");
+  button.disabled = true;
+  button.querySelector("span").textContent = "Entrando...";
   try {
     const result = await request("/api/admin/login", {
       method: "POST",
@@ -31,6 +54,9 @@ byId("loginForm").addEventListener("submit", async (event) => {
     await openPanel();
   } catch (error) {
     byId("loginError").textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.querySelector("span").textContent = "Entrar no painel";
   }
 });
 
