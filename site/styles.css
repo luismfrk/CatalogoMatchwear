@@ -111,6 +111,7 @@ a {
 .hero-copy {
   position: relative;
   z-index: 2;
+  min-width: 0;
 }
 .eyebrow {
   margin: 0;
@@ -126,18 +127,22 @@ h3 {
   font-weight: 800;
 }
 .hero h1 {
-  max-width: 700px;
-  margin: 18px 0 24px;
+  width: min(100%, 700px);
+  margin: 18px 0 42px;
   color: var(--white);
-  font-size: clamp(76px, 10vw, 144px);
-  letter-spacing: -0.035em;
-  line-height: 0.77;
+  font-size: clamp(64px, 8.2vw, 126px);
+  letter-spacing: -0.045em;
+  line-height: 0.82;
+}
+.hero h1 span {
+  display: block;
+  white-space: nowrap;
 }
 .hero h1::after {
   display: block;
   width: 0.72em;
   height: 10px;
-  margin-top: 28px;
+  margin-top: 32px;
   background: var(--green);
   content: "";
   transform: skewX(-12deg);
@@ -887,7 +892,7 @@ dialog::backdrop {
     padding-top: 52px;
   }
   .hero h1 {
-    font-size: clamp(68px, 17vw, 100px);
+    font-size: clamp(64px, 13vw, 94px);
   }
   .hero-product {
     height: 420px;
@@ -954,9 +959,9 @@ dialog::backdrop {
   .hero-copy {
     z-index: 3;
   }
-  .hero-text {
-    max-width: 330px;
-    font-size: 15px;
+  .hero h1 {
+    width: 100%;
+    font-size: clamp(62px, 17vw, 88px);
   }
   .hero-product {
     position: absolute;
