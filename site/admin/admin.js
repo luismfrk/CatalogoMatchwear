@@ -95,7 +95,20 @@ function render() {
   byId("products").innerHTML = products
     .map(
       (p) =>
-        `<article class="product"><img src="${p.customImages?.[0] || p.images?.[0] || ""}" alt=""><div><small>${p.category} · ${p.visibility === "draft" ? "Rascunho" : "Publicado"}</small><h2>${p.name}</h2><strong>${p.salePrice ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(p.salePrice) : "Sem preço"}</strong><button data-id="${p.supplierId}">Revisar</button></div></article>`,
+        `<article class="product">
+          <div class="product-image">
+            <img src="${p.customImages?.[0] || p.images?.[0] || ""}" alt="${p.name}">
+            <span class="visibility-badge ${p.visibility}">${p.visibility === "draft" ? "Rascunho" : "Publicado"}</span>
+          </div>
+          <div class="product-content">
+            <small>${p.category}</small>
+            <h2>${p.name}</h2>
+            <div class="product-footer">
+              <strong class="${p.salePrice ? "" : "missing-price"}">${p.salePrice ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(p.salePrice) : "Preço pendente"}</strong>
+              <button data-id="${p.supplierId}" aria-label="Revisar ${p.name}">Revisar <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </article>`,
     )
     .join("");
   byId("products")

@@ -61,34 +61,58 @@
         </div>
       </section>
       <section id="panelView" hidden>
-        <header>
-          <div>
-            <p>MATCHWEAR FC</p>
-            <h1>PRODUTOS</h1>
+        <header class="panel-header">
+          <div class="panel-brand">
+            <div class="panel-logo-crop">
+              <img
+                src="../assets/matchwear-logo-green-on-blue.png"
+                alt="Matchwear FC"
+              />
+            </div>
+            <div>
+              <p>PAINEL DO CATÁLOGO</p>
+              <h1>Produtos</h1>
+            </div>
           </div>
-          <button id="logout" class="secondary">Sair</button>
+          <div class="panel-actions">
+            <a href="../" class="store-link">Ver loja ↗</a>
+            <button id="logout" class="secondary">Sair</button>
+          </div>
         </header>
         <div class="summary">
-          <article>
+          <article class="metric-card">
+            <span class="metric-kicker">Aguardando revisão</span>
             <strong id="draftCount">—</strong><span>Rascunhos</span>
           </article>
-          <article>
+          <article class="metric-card">
+            <span class="metric-kicker">Visíveis na loja</span>
             <strong id="publishedCount">—</strong><span>Publicados</span>
           </article>
-          <article>
+          <article class="metric-card metric-sync">
+            <span class="metric-kicker">Fornecedor</span>
             <strong id="syncDate">—</strong><span>Última sincronização</span>
           </article>
         </div>
-        <div class="filters">
-          <input
-            id="searchAdmin"
-            type="search"
-            placeholder="Buscar produto..."
-          /><select id="visibility">
-            <option value="draft">Rascunhos</option>
-            <option value="published">Publicados</option>
-            <option value="all">Todos</option>
-          </select>
+        <div class="catalog-toolbar">
+          <div>
+            <p>GERENCIAMENTO</p>
+            <h2>Catálogo completo</h2>
+          </div>
+          <div class="filters">
+            <label class="admin-search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                id="searchAdmin"
+                type="search"
+                placeholder="Buscar produto..."
+              />
+            </label>
+            <select id="visibility" aria-label="Filtrar por publicação">
+              <option value="draft">Rascunhos</option>
+              <option value="published">Publicados</option>
+              <option value="all">Todos os produtos</option>
+            </select>
+          </div>
         </div>
         <p id="notice" class="notice"></p>
         <div id="products" class="products"></div>
