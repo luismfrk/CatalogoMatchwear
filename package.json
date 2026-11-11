@@ -12,6 +12,7 @@
     "db:seed": "node scripts/seed-postgres.js",
     "db:verify": "node scripts/verify-neon.js",
     "build": "node scripts/build-site.js",
+    "start": "node scripts/serve.js",
     "dev": "node scripts/serve.js",
     "test": "node --test",
     "verify:live": "node scripts/verify-live.js"

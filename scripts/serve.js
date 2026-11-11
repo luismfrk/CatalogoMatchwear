@@ -6,6 +6,7 @@ import { handleAdminApi } from "../src/admin/http.js";
 
 await import("./build-site.js");
 const root = path.resolve("dist");
+const port = Number(process.env.PORT || 4173);
 const types = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -32,8 +33,8 @@ createServer(async (req, res) => {
     res.statusCode = 404;
     res.end("Não encontrado");
   }
-}).listen(4173, () =>
+}).listen(port, () =>
   console.log(
-    "Catálogo: http://localhost:4173 | Painel: http://localhost:4173/admin/",
+    `Catálogo: http://localhost:${port} | Painel: http://localhost:${port}/admin/`,
   ),
 );
