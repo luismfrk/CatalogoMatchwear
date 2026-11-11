@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "sync": "node src/sync/run.js",
+    "catalog:apply-sales-policy": "node scripts/apply-sales-policy.js",
     "worker": "node src/sync/worker.js",
     "admin": "node src/admin/cli.js",
     "admin:server": "node src/admin/server.js",

@@ -26,9 +26,30 @@ export function mergeState(
       byId.set(item.supplierId, item);
     }
   }
+  applySalesPolicy(state);
   state.sync.lastSuccessfulAt = now;
   state.sync.lastError = null;
   state.sync.productCount = collected.length;
+  return state;
+}
+
+export function applySalesPolicy(state) {
+  for (const product of state.products || []) {
+    const hasStock = product.sizes?.some((size) => size.status === "available");
+
+    if (!hasStock) {
+      product.visibility = "draft";
+      continue;
+    }
+
+    if (/\btorcedor\b/i.test(product.name || "")) {
+      product.salePrice = 180;
+      product.visibility = "published";
+    } else if (/\bjogador\b/i.test(product.name || "")) {
+      product.salePrice = 250;
+      product.visibility = "published";
+    }
+  }
   return state;
 }
 
@@ -40,7 +61,12 @@ export function makePublicCatalog(state, settings = {}) {
     whatsappNumber: settings.whatsappNumber || "",
     siteUrl: settings.siteUrl || "",
     products: state.products
-      .filter((p) => p.visibility === "published" && Number(p.salePrice) > 0)
+      .filter(
+        (p) =>
+          p.visibility === "published" &&
+          Number(p.salePrice) > 0 &&
+          p.sizes?.some((size) => size.status === "available"),
+      )
       .map((p) => ({
         id: p.supplierId,
         slug: `produto-${p.supplierId}`,
