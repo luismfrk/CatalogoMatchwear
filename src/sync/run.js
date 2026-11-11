@@ -6,10 +6,12 @@ import {
   validateCollection,
 } from "./catalog.js";
 import { readJson, writeJson } from "../lib/storage.js";
+import { closeDatabasePool } from "../lib/database.js";
 
 export async function runSync() {
   const startedAt = new Date().toISOString();
   const previous = await readJson("state.json", null);
+  const previousPublic = await readJson("catalog.json", null);
   try {
     const result = await collectAll({
       knownUrls: previous?.products?.map((product) => product.sourceUrl) || [],
@@ -24,8 +26,9 @@ export async function runSync() {
     await writeJson(
       "catalog.json",
       makePublicCatalog(state, {
-        whatsappNumber: process.env.WHATSAPP_NUMBER,
-        siteUrl: process.env.SITE_URL,
+        whatsappNumber:
+          process.env.WHATSAPP_NUMBER || previousPublic?.whatsappNumber,
+        siteUrl: process.env.SITE_URL || previousPublic?.siteUrl,
       }),
       { publicRead: true },
     );
@@ -60,4 +63,7 @@ export async function runSync() {
     return report;
   }
 }
-if (process.argv[1]?.endsWith("run.js")) await runSync();
+if (process.argv[1]?.endsWith("run.js")) {
+  await runSync();
+  await closeDatabasePool();
+}

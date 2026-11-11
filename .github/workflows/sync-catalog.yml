@@ -1,0 +1,35 @@
+name: Sincronizar catálogo
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: matchwear-catalog-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Sincronizar estoque com a Manto Esportivo
+        run: npm run sync
+        env:
+          STORAGE_MODE: postgres
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          REQUEST_DELAY_MS: 700
+          MAX_PAGES: 100

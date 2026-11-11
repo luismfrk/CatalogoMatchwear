@@ -73,6 +73,10 @@ npm run db:verify
 
 No Render, configure `DATABASE_URL` no worker e no serviço `matchwear-fc-admin-api`, mantenha `STORAGE_MODE=postgres` e use como `CATALOG_URL` do Static Site a URL pública da API seguida de `/api/catalog`. Execute `npm run db:migrate` uma vez antes de iniciar os serviços. `DATABASE_URL_UNPOOLED` é necessária apenas onde as migrações são executadas e nunca deve ser exposta na vitrine.
 
+### Sincronização agendada no GitHub
+
+O workflow `.github/workflows/sync-catalog.yml` executa a coleta no minuto 17 de cada hora e também pode ser iniciado manualmente em **Actions → Sincronizar catálogo → Run workflow**. No repositório do GitHub, crie o secret `DATABASE_URL` em **Settings → Secrets and variables → Actions → New repository secret**, usando a URL do Neon com connection pooling. O workflow preserva o número do WhatsApp e a URL pública já gravados no catálogo quando essas variáveis não forem fornecidas.
+
 ## Verificações
 
 `npm test` cobre idempotência, atualização isolada de estoque, preservação de preço/visibilidade, rejeição de coleta falha e ausência de dados do fornecedor no JSON público. `npm run verify:live` refaz a leitura do produto real. O layout usa breakpoints para celular, tamanhos esgotados ficam desabilitados e a mensagem do WhatsApp contém produto, tamanho e link da Matchwear FC.
