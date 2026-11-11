@@ -7,7 +7,6 @@ const ids = [
   "size",
   "sort",
   "count",
-  "sync",
   "productDialog",
   "dialogContent",
   "categoryChips",
@@ -137,8 +136,6 @@ function setup() {
   ui.productDialog.addEventListener("click", (event) => {
     if (event.target === ui.productDialog) ui.productDialog.close();
   });
-  if (catalog.lastSuccessfulSyncAt)
-    ui.sync.textContent = `Catálogo atualizado em ${new Date(catalog.lastSuccessfulSyncAt).toLocaleString("pt-BR")}`;
   const whatsappNumber = String(catalog.whatsappNumber || "").replace(/\D/g, "");
   if (whatsappNumber) {
     ui.footerWhatsapp.href = `https://wa.me/${whatsappNumber}`;

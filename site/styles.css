@@ -677,9 +677,6 @@ h3 {
   margin: 0;
   color: var(--ice);
 }
-.footer-brand p {
-  font-size: clamp(17px, 1.5vw, 21px);
-}
 .footer-contact {
   text-align: right;
 }
@@ -751,11 +748,6 @@ h3 {
 }
 .footer-credits a:hover {
   text-decoration: underline;
-}
-.site-footer .sync {
-  color: rgb(244 246 250 / 68%);
-  font-size: 12px;
-  text-align: right;
 }
 dialog {
   width: min(1050px, 94vw);
@@ -1033,9 +1025,6 @@ dialog::backdrop {
   }
   .footer-bottom {
     gap: 14px;
-  }
-  .site-footer .sync {
-    text-align: left;
   }
   .product-detail {
     grid-template-columns: 1fr;
