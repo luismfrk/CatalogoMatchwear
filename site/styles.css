@@ -171,7 +171,7 @@ h3 {
 .hero-product {
   position: relative;
   z-index: 2;
-  align-self: end;
+  align-self: center;
   height: 540px;
 }
 .hero-product::after {
@@ -179,17 +179,105 @@ h3 {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 16%;
-  background: linear-gradient(transparent, var(--blue));
+  height: 22%;
+  background: linear-gradient(transparent, var(--blue) 78%);
   content: "";
+  pointer-events: none;
 }
-.hero-product img {
+.logo-stage {
   position: relative;
   z-index: 1;
   width: 100%;
   height: 100%;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.logo-stage::before {
+  position: absolute;
+  width: min(82%, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(2 249 168 / 16%) 0,
+    rgb(2 249 168 / 5%) 48%,
+    transparent 70%
+  );
+  content: "";
+  filter: blur(2px);
+}
+.logo-stage-orbit {
+  position: absolute;
+  width: min(77%, 560px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(2 249 168 / 24%);
+  border-radius: 50%;
+  transform: rotateX(68deg) rotateZ(-12deg);
+}
+.logo-stage-orbit::before,
+.logo-stage-orbit::after {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgb(244 246 250 / 12%);
+  border-radius: inherit;
+  content: "";
+}
+.logo-stage-orbit::after {
+  inset: 22%;
+  border-color: rgb(2 249 168 / 14%);
+}
+.logo-scene {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.logo-scene:active {
+  cursor: grabbing;
+}
+.logo-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 30px 32px rgb(0 0 0 / 42%));
+}
+.logo-scene-fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(90%, 680px);
+  height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 28px 28px rgb(0 0 0 / 38%));
+  filter: drop-shadow(0 30px 32px rgb(0 0 0 / 42%));
+  transform: translate(-50%, -50%) rotate(-2deg);
+}
+.logo-scene.is-ready .logo-scene-fallback {
+  opacity: 0;
+}
+.logo-stage-hint {
+  position: absolute;
+  z-index: 3;
+  bottom: 36px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: rgb(244 246 250 / 72%);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.logo-stage-hint span {
+  width: 20px;
+  height: 1px;
+  background: var(--green);
 }
 .hero-number {
   position: absolute;
@@ -804,6 +892,9 @@ dialog::backdrop {
   .hero-product {
     height: 420px;
   }
+  .logo-stage-hint {
+    bottom: 18px;
+  }
   .tools {
     grid-template-columns: 1fr 1fr;
   }
@@ -869,11 +960,14 @@ dialog::backdrop {
   }
   .hero-product {
     position: absolute;
-    right: -25%;
-    bottom: -7%;
-    width: 88%;
-    height: 390px;
-    opacity: 0.76;
+    right: -3%;
+    bottom: -2%;
+    width: 96%;
+    height: 330px;
+    opacity: 0.88;
+  }
+  .logo-stage-hint {
+    display: none;
   }
   .hero-stripe {
     left: 71%;

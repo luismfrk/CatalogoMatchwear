@@ -8,7 +8,6 @@ const ids = [
   "sort",
   "count",
   "sync",
-  "heroImage",
   "productDialog",
   "dialogContent",
   "categoryChips",
@@ -136,11 +135,6 @@ function setup() {
   ui.productDialog.addEventListener("click", (event) => {
     if (event.target === ui.productDialog) ui.productDialog.close();
   });
-  if (products[0]?.images[0]) {
-    ui.heroImage.src = products[0].images[0];
-    ui.heroImage.alt = products[0].name;
-    ui.heroImage.hidden = false;
-  }
   if (catalog.lastSuccessfulSyncAt)
     ui.sync.textContent = `Catálogo atualizado em ${new Date(catalog.lastSuccessfulSyncAt).toLocaleString("pt-BR")}`;
   updateCounters();

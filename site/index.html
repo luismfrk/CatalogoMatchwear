@@ -59,9 +59,19 @@
           </p>
           <a href="#catalogo" class="button button-primary">Ver catálogo</a>
         </div>
-        <div class="hero-product" aria-label="Camisa em destaque">
-          <span class="hero-number" aria-hidden="true">10</span
-          ><img id="heroImage" src="" alt="Camisa em destaque" hidden />
+        <div class="hero-product" aria-label="Logo Matchwear FC em 3D">
+          <span class="hero-number" aria-hidden="true">10</span>
+          <div class="logo-stage">
+            <div class="logo-stage-orbit" aria-hidden="true"></div>
+            <div id="logoScene" class="logo-scene">
+              <img
+                class="logo-scene-fallback"
+                src="assets/matchwear-logo-green-on-blue.png"
+                alt="Matchwear — Vista sua paixão"
+              />
+            </div>
+            <p class="logo-stage-hint"><span></span> Arraste para girar</p>
+          </div>
         </div>
       </section>
       <section id="catalogo" class="catalog">
@@ -141,5 +151,6 @@
     </dialog>
     <script src="config.js"></script>
     <script type="module" src="app.js"></script>
+    <script type="module" src="hero-3d.js"></script>
   </body>
 </html>
